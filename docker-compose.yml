@@ -1,0 +1,22 @@
+version: '3.8'
+
+services:
+  emaillist:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: emaillist-tomcat
+    ports:
+      - "8080:8080"
+    restart: unless-stopped
+    environment:
+      - JAVA_OPTS=-Xms256m -Xmx512m
+      # ── SMTP / Email settings ──────────────────────────────────────────────
+      # Replace these values with your real credentials before running.
+      # For Gmail: enable 2-FA, then create an App Password at
+      #   https://myaccount.google.com/apppasswords
+      - MAIL_HOST=smtp.gmail.com
+      - MAIL_PORT=587
+      - MAIL_USERNAME=your_email@gmail.com
+      - MAIL_PASSWORD=your_app_password_here
+      - MAIL_FROM=your_email@gmail.com
